@@ -11,4 +11,15 @@ export class UsersController {
   async createUser(@Payload() dto: UserDTO) {
     return await this.usersService.create(dto);
   }
+
+  @MessagePattern('updateUser')
+  async updateUser(@Payload() data: { id: number, dto: UserDTO }) {
+    const {id, dto} = data;
+    return await this.usersService.update(id,dto);
+  }
+
+  @MessagePattern('getAllUsers')
+  async getAllUsers() {
+    return await this.usersService.findAll();
+  }
 }

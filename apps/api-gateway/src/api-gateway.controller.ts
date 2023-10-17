@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiGatewayService } from './api-gateway.service';
 import { ClientProxy, ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { UserDTO } from 'apps/users/src/dto/userDTO';
@@ -40,6 +40,26 @@ async onModuleInit() {
   @Post("/user")
     async createUser(@Body() dto: UserDTO) {
         const data = await this.clientUsers.send("createUser", dto).toPromise();
-        return {User:data};
+         await this.clientActions.send("createAction",{type:"create",userId:data.id}).toPromise();
+        return data;
     }
+
+  @Patch("/user/:id")
+    async updateUser(@Param("id") id: number,@Body() dto: UserDTO) {
+        const data = await this.clientUsers.send("updateUser", {id, dto}).toPromise();
+         await this.clientActions.send("createAction",{type:"update",userId:id}).toPromise();
+        return data;
+    }
+
+   @Get("/users")
+    async getAllUsers() {
+        const data = await this.clientUsers.send("getAllUsers",{}).toPromise();
+        return data;
+    } 
+
+    @Get("/actions/search")
+    async searchActions(@Query("userId") userId:number) {
+        const data = await this.clientActions.send("searchActions",{userId}).toPromise();
+        return data;
+    } 
 }

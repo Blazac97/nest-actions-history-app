@@ -14,8 +14,9 @@ export class UserService {
     return user
   }
 
-  async update(id: number, user: User): Promise<void> {
-    await this.UserRepository.update(user, { where: { id } });
+  async update(id: number, user) {
+    await  this.UserRepository.update(user, { where: { id } });
+    return this.UserRepository.findOne({ where: { id } });
   }
 
   async findAll(): Promise<User[]> {

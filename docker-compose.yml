@@ -42,8 +42,8 @@ services:
     command: npm run start:dev actions-history
     ports:
       - '3002:3002'
-    # env_file:
-    #   - ./apps/actions-history/.env
+    env_file:
+      - ./apps/actions-history/.env
     depends_on:
       - db
       - rabbitmq
