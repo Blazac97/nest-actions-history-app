@@ -1,5 +1,5 @@
 export class UserDTO {
-  name:string
+  name: string;
 
-  email:string
+  email: string;
 }

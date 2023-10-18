@@ -6,9 +6,11 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Action } from './actions.model';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-      envFilePath: '.env'
-    }),SequelizeModule.forRoot({
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
+    SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
       port: Number(process.env.POSTGRES_PORT),
@@ -19,7 +21,8 @@ import { Action } from './actions.model';
       autoLoadModels: true,
       synchronize: true,
     }),
-    SequelizeModule.forFeature([Action])],
+    SequelizeModule.forFeature([Action]),
+  ],
   controllers: [ActionsHistoryController],
   providers: [ActionsHistoryService],
 })

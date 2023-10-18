@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { UserService } from './users.service';
-import { Payload,MessagePattern } from '@nestjs/microservices';
+import { Payload, MessagePattern } from '@nestjs/microservices';
 import { UserDTO } from './dto/userDTO';
 
 @Controller()
@@ -13,9 +13,9 @@ export class UsersController {
   }
 
   @MessagePattern('updateUser')
-  async updateUser(@Payload() data: { id: number, dto: UserDTO }) {
-    const {id, dto} = data;
-    return await this.usersService.update(id,dto);
+  async updateUser(@Payload() data: { id: number; dto: UserDTO }) {
+    const { id, dto } = data;
+    return await this.usersService.update(id, dto);
   }
 
   @MessagePattern('getAllUsers')

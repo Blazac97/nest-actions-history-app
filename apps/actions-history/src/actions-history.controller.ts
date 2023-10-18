@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { ActionsHistoryService } from './actions-history.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { ActionDTO } from './dto/actionDTO';
@@ -13,7 +13,10 @@ export class ActionsHistoryController {
   }
 
   @MessagePattern('searchActions')
-  async searchActions(@Payload() data:{userId:number}) {
-    return await this.actionsHistoryService.search(data.userId);
+  async searchActions(
+    @Payload() data: { userId: number; page?: number; take?: number },
+  ) {
+    const { userId, take, page } = data;
+    return await this.actionsHistoryService.search(userId, { take, page });
   }
 }

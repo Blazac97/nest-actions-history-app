@@ -6,9 +6,11 @@ import { UsersController } from './users.controller';
 import { UserService } from './users.service';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-      envFilePath: '.env'
-    }),SequelizeModule.forRoot({
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
+    SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
       port: Number(process.env.POSTGRES_PORT),
@@ -19,7 +21,8 @@ import { UserService } from './users.service';
       autoLoadModels: true,
       synchronize: true,
     }),
-    SequelizeModule.forFeature([User])],
+    SequelizeModule.forFeature([User]),
+  ],
   controllers: [UsersController],
   providers: [UserService],
 })

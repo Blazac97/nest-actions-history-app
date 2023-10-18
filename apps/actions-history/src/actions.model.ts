@@ -1,19 +1,24 @@
 import { Model, Table, Column, DataType } from 'sequelize-typescript';
 
-@Table({tableName:'Actions'})
+@Table({ tableName: 'Actions' })
 export class Action extends Model {
-   @Column({type:DataType.INTEGER, unique:true, autoIncrement:true, primaryKey:true})
-   id:number
-  
+  @Column({
+    type: DataType.INTEGER,
+    unique: true,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  id: number;
+
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
-  type: string;   // create , update
+  type: string; // create , update
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: false
+    allowNull: false,
   })
   userId: number;
 }

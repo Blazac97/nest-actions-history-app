@@ -1,5 +1,5 @@
 export class ActionDTO {
-  type:string
+  type: string;
 
-  userId:number
+  userId: number;
 }

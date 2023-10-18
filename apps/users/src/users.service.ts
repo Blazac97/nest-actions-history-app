@@ -11,11 +11,11 @@ export class UserService {
 
   async create(dto): Promise<User> {
     const user = await this.UserRepository.create(dto);
-    return user
+    return user;
   }
 
   async update(id: number, user) {
-    await  this.UserRepository.update(user, { where: { id } });
+    await this.UserRepository.update(user, { where: { id } });
     return this.UserRepository.findOne({ where: { id } });
   }
 
